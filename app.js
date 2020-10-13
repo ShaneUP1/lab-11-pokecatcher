@@ -8,26 +8,24 @@ const images = document.querySelectorAll('label > img');
 const resetButton = document.querySelector('button');
 
 
-
-
 // initialize state
 let rounds = 10;
 const resultsArray = [];
+
 
 // set event listeners to update state and DOM
 
 function generatePokemon(pokeData) {
 
-
     for (let i = 0; i < radios.length; i++) {
-        radios[i].disabled = false;
         radios[i].checked = false;
+    }
+    if (rounds <= 0) {
+        window.location.href = '../results/index.html';
     }
 
     let rand1 = Math.floor(Math.random() * pokeData.length);
-
     let rand2 = Math.floor(Math.random() * pokeData.length);
-
     let rand3 = Math.floor(Math.random() * pokeData.length);
 
     while (rand1 === rand2 || rand1 === rand3 || rand2 === rand3) {
@@ -47,42 +45,37 @@ function generatePokemon(pokeData) {
 
     radios[2].value = poke3.pokemon;
     images[2].src = poke3.url_image;
-
-
-
-
-    for (let i = 0; i < radios.length; i++) {
-        radios[i].addEventListener('change', (e) => {
-            // rounds--;
-
-            radios.forEach((radio) => {
-                let item = findByName(resultsArray, radio.value);
-                if (!item) {
-                    item = {
-                        name: radio.value,
-                        encountered: 1,
-                        captured: 0
-                    };
-                    resultsArray.push(item);
-                } else {
-                    item.encountered++;
-                }
-            });
-
-            let capturedPokemon = findByName(resultsArray, e.target.value);
-            capturedPokemon.captured++;
-
-
-
-
-            generatePokemon(pokeData);
-
-        });
-
-        console.log(resultsArray);
-
-
-    }
 }
 
+
+for (let i = 0; i < radios.length; i++) {
+    radios[i].addEventListener('change', (e) => {
+        rounds--;
+
+
+        radios.forEach((radio) => {
+            let item = findByName(resultsArray, radio.value);
+            if (!item) {
+                item = {
+                    name: radio.value,
+                    encountered: 1,
+                    captured: 0
+                };
+                resultsArray.push(item);
+            } else {
+                item.encountered++;
+            }
+        });
+
+        let capturedPokemon = findByName(resultsArray, e.target.value);
+        capturedPokemon.captured++;
+
+        generatePokemon(pokeData);
+        console.log(resultsArray);
+    });
+
+
+
+
+}
 generatePokemon(pokeData);
