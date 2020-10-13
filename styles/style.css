@@ -55,6 +55,20 @@ section {
     display: none;
 }
 
+#three-pokemon {
+    display: flex;
+    flex-direction: row;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+label > input {
+    display: none;
+}
+
 header {
     display: flex;
     justify-content: flex-end;
