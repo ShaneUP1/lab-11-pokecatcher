@@ -1,5 +1,5 @@
 // import functions and grab DOM elements
-
+import { findByName } from './utils.js';
 import { pokeData } from './raw-data.js';
 
 const results = document.querySelector('#results');
@@ -12,11 +12,18 @@ const resetButton = document.querySelector('button');
 
 // initialize state
 let rounds = 10;
-let resultsArray = [];
+const resultsArray = [];
 
 // set event listeners to update state and DOM
 
 function generatePokemon(pokeData) {
+
+
+    for (let i = 0; i < radios.length; i++) {
+        radios[i].disabled = false;
+        radios[i].checked = false;
+    }
+
     let rand1 = Math.floor(Math.random() * pokeData.length);
 
     let rand2 = Math.floor(Math.random() * pokeData.length);
@@ -42,20 +49,40 @@ function generatePokemon(pokeData) {
     images[2].src = poke3.url_image;
 
 
+
+
     for (let i = 0; i < radios.length; i++) {
         radios[i].addEventListener('change', (e) => {
-            rounds--;
+            // rounds--;
 
-            // create objects of each pokemon
+            radios.forEach((radio) => {
+                let item = findByName(resultsArray, radio.value);
+                if (!item) {
+                    item = {
+                        name: radio.value,
+                        encountered: 1,
+                        captured: 0
+                    };
+                    resultsArray.push(item);
+                } else {
+                    item.encountered++;
+                }
+            });
 
-            const pokeCapturedName = (e.target.value);
-            console.log(pokeCapturedName);
+            let capturedPokemon = findByName(resultsArray, e.target.value);
+            capturedPokemon.captured++;
 
 
 
 
-        })
-        generatePokemon(pokeData);
+            generatePokemon(pokeData);
+
+        });
+
+        console.log(resultsArray);
+
 
     }
+}
 
+generatePokemon(pokeData);

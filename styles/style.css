@@ -65,6 +65,10 @@ img {
     height: 200px;
 }
 
+:checked + img {
+    border: solid 3px red;
+}
+
 label > input {
     display: none;
 }
