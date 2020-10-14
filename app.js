@@ -28,7 +28,7 @@ function generatePokemon(pokeData) {
     }
     if (rounds <= 0) {
         setInLocalStorage(POKEMON, resultsArray);
-        window.location.href = '../results/index.html';
+        window.location.href = './results/index.html';
     }
 
     let rand1 = Math.floor(Math.random() * pokeData.length);
