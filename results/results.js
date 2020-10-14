@@ -64,6 +64,9 @@ new Chart(ctx, {
     },
     options: {
         scales: {
+            yAxes: [{
+                beginAtZero: true
+            }],
             xAxes: [{
                 ticks: {
                     beginAtZero: true
@@ -89,10 +92,10 @@ for (let i = 0; i < newPokeArray.length; i++) {
 }
 
 new Chart(cty, {
-    type: 'pie',
+    type: 'bar',
     data: {
         // labels: labels,
-        seenButNeverCaught,
+        labels: seenButNeverCaught,
         datasets: [{
             label: 'Pokemon Seen But Never Caught',
             data: seenThisManyTimes,
@@ -103,6 +106,11 @@ new Chart(cty, {
     },
     options: {
         scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
             xAxes: [{
                 ticks: {
                     beginAtZero: true
