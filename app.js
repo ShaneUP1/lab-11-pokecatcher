@@ -1,6 +1,8 @@
 // import functions and grab DOM elements
-import { findByName } from './utils.js';
+import { findByName, setInLocalStorage } from './utils.js';
 import { pokeData } from './raw-data.js';
+
+const POKEMON = 'POKEMON';
 
 const results = document.querySelector('#results');
 const radios = document.querySelectorAll('input');
@@ -10,17 +12,22 @@ const resetButton = document.querySelector('button');
 
 // initialize state
 let rounds = 10;
-const resultsArray = [];
+export const resultsArray = [];
+
 
 
 // set event listeners to update state and DOM
 
 function generatePokemon(pokeData) {
 
+
+    results.textContent = 10 - rounds;
+
     for (let i = 0; i < radios.length; i++) {
         radios[i].checked = false;
     }
     if (rounds <= 0) {
+        setInLocalStorage(POKEMON, resultsArray);
         window.location.href = '../results/index.html';
     }
 
@@ -73,9 +80,6 @@ for (let i = 0; i < radios.length; i++) {
         generatePokemon(pokeData);
         console.log(resultsArray);
     });
-
-
-
 
 }
 generatePokemon(pokeData);

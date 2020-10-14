@@ -1,23 +1,19 @@
 import { pokeData } from './raw-data.js';
 
+export const CAPTURED = 'CAPTURED';
 
 
-export function generatePokemon(pokeData) {
+export function getFromLocalStorage(key) {
+    const item = localStorage.getItem(key);
 
-    let rand1 = Math.floor(Math.random() * pokeData.length);
-    let rand2 = Math.floor(Math.random() * pokeData.length);
-    let rand3 = Math.floor(Math.random() * pokeData.length);
+    return JSON.parse(item);
+}
 
-    while (rand1 === rand2 || rand1 === rand3 || rand2 === rand3) {
-        rand1 = Math.floor(Math.random() * pokeData.length);
-        rand2 = Math.floor(Math.random() * pokeData.length);
-        rand3 = Math.floor(Math.random() * pokeData.length);
-    }
-    const poke1 = pokeData[rand1];
-    const poke2 = pokeData[rand2];
-    const poke3 = pokeData[rand3];
 
-    return poke1, poke2, poke3;
+export function setInLocalStorage(key, value) {
+    const stringyItem = JSON.stringify(value);
+
+    localStorage.setItem(key, stringyItem);
 }
 
 
