@@ -76,7 +76,7 @@ label > input {
 
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     background-color: var(--color3);
     height: var(--header-height);
     box-shadow: var(--shadow);
